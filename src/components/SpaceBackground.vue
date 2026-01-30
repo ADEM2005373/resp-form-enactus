@@ -21,14 +21,18 @@ let animationId: number;
 let starGeo: THREE.BufferGeometry;
 let starMaterial: THREE.PointsMaterial;
 let starPoints: THREE.Points;
-const STAR_COUNT = 50;
+
+// Detect Mobile
+const isMobile = window.innerWidth < 768;
+
+const STAR_COUNT = isMobile ? 15 : 50;
 const starVelocities: { x: number, y: number, z: number }[] = [];
 
 // Parallax
 const mouseX = ref(0);
 const mouseY = ref(0);
 
-const PARTICLE_COUNT = 8000;
+const PARTICLE_COUNT = isMobile ? 2000 : 8000;
 let time = 0;
 
 const handleMouseMove = (event: MouseEvent) => {
@@ -105,9 +109,12 @@ const initThree = () => {
   camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
   camera.position.z = 500;
 
-  renderer = new THREE.WebGLRenderer({ alpha: false });
+  renderer = new THREE.WebGLRenderer({ 
+    alpha: false, 
+    antialias: !isMobile // Disable antialias on mobile for performance
+  });
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Cap pixel ratio
   container.value.innerHTML = ''; // Clear previous canvas if any
   container.value.appendChild(renderer.domElement);
 
@@ -252,6 +259,15 @@ onMounted(() => {
   initThree();
   initShootingStars();
   window.addEventListener('mousemove', handleMouseMove);
+  
+  // Mobile Touch Support
+  window.addEventListener('touchmove', (e) => {
+    if (e.touches.length > 0) {
+      mouseX.value = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
+      mouseY.value = -(e.touches[0].clientY / window.innerHeight) * 2 + 1;
+    }
+  }, { passive: true });
+
   animate();
 });
 

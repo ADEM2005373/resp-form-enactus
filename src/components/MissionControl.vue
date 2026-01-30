@@ -393,4 +393,32 @@ onMounted(() => {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-20px); }
 }
+
+@media (max-width: 768px) {
+  .mission-control {
+    padding-top: 10vh;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .mission-title {
+    font-size: 1.8rem;
+    letter-spacing: 3px;
+    margin-bottom: 1.5rem;
+  }
+
+  .step-title {
+    font-size: 1.4rem;
+  }
+
+  .controls {
+    flex-direction: column-reverse;
+    gap: 1rem;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 0.8rem;
+  }
+}
 </style>

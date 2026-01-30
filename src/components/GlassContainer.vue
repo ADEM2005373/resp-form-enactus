@@ -32,6 +32,9 @@ const handleMouseMove = (e: MouseEvent) => {
   
   // Max rotation degrees
   const limit = 10;
+  
+  // Disable tilt on mobile
+  if (window.innerWidth < 768) return;
 
   rotY.value = ((x - centerX) / centerX) * limit; // Rotate Y based on X movement
   rotX.value = -((y - centerY) / centerY) * limit; // Rotate X based on Y movement (inverted)

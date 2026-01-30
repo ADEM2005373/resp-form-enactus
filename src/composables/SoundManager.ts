@@ -7,7 +7,7 @@ export const initAudio = () => {
     if (!audioCtx) {
         audioCtx = new AudioContextClass();
         masterGain = audioCtx.createGain();
-        masterGain.gain.value = 0.3; // Master volume
+        masterGain.gain.value = 0.15; // Lower Master volume for mobile safety
         masterGain.connect(audioCtx.destination);
     }
     if (audioCtx.state === 'suspended') {
@@ -42,8 +42,8 @@ export const playSound = {
     },
     click: () => {
         // Mechanical click
-        createOscillator('square', 800, 0.1, 0.2);
-        createOscillator('sawtooth', 400, 0.1, 0.2);
+        createOscillator('square', 800, 0.1, 0.1);
+        createOscillator('sawtooth', 400, 0.1, 0.1);
     },
     type: () => {
         // Soft keystroke
@@ -56,7 +56,7 @@ export const playSound = {
         const gain = audioCtx.createGain();
         osc.frequency.setValueAtTime(100, audioCtx.currentTime);
         osc.frequency.exponentialRampToValueAtTime(8000, audioCtx.currentTime + 1.5);
-        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.1, audioCtx.currentTime); // Reduced from 0.3
         gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1.5);
 
         osc.connect(gain);
@@ -72,7 +72,7 @@ export const playSound = {
     },
     error: () => {
         // Low buzzer
-        createOscillator('sawtooth', 150, 0.3, 0.4);
-        createOscillator('sawtooth', 100, 0.3, 0.4);
+        createOscillator('sawtooth', 150, 0.3, 0.2); // Reduced from 0.4
+        createOscillator('sawtooth', 100, 0.3, 0.2);
     }
 };

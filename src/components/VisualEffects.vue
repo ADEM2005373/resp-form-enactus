@@ -68,4 +68,11 @@
   80% { transform: translate(10px, 10px); }
   100% { transform: translate(0, 0); }
 }
+
+@media (max-width: 768px) {
+  .visual-effects-layer .scanlines,
+  .visual-effects-layer .noise {
+    display: none; /* Disable heavy effects on mobile */
+  }
+}
 </style>
