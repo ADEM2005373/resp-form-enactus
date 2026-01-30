@@ -1,0 +1,45 @@
+/* Global Animation Presets */
+
+@keyframes glitch {
+    0% {
+        transform: translate(0);
+    }
+
+    20% {
+        transform: translate(-2px, 2px);
+    }
+
+    40% {
+        transform: translate(-2px, -2px);
+    }
+
+    60% {
+        transform: translate(2px, 2px);
+    }
+
+    80% {
+        transform: translate(2px, -2px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
+
+@keyframes neonPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 10px #00f3ff, 0 0 20px #00f3ff, 0 0 40px #00f3ff;
+    }
+
+    50% {
+        box-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+    }
+}
+
+.mind-blown-text {
+    animation: neonPulse 2s infinite alternate;
+    color: white;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #00f3ff, 0 0 30px #00f3ff, 0 0 40px #00f3ff;
+}
